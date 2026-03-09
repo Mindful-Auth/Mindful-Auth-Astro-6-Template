@@ -1,0 +1,76 @@
+---
+// Layout for protected pages (dashboard, security settings, etc.)
+//
+// IMPORTANT: This layout must be used on all pages inside [memberid] routes.
+// The middleware enforces authentication, but this layout provides the navigation bar, styling, and logout functionality. Pages in [memberid] without this layout will render unstyled and without navigation if accessed with a valid session.
+//
+// Usage:
+//   import MAuthProtected from "@/layouts/MAuthProtected.astro";
+//   <MAuthProtected title="Page Title" scripts={['MAuthSecurityScript']}>
+//     <p>Your content here</p>
+//   </MAuthProtected>
+//
+import "../styles/global.css";
+import { MAuthMainScript, MAuthSecurityScript } from "@mindfulauth/core/astro";
+
+type ScriptName = keyof typeof scriptMap;
+
+const scriptMap = {
+    MAuthSecurityScript: MAuthSecurityScript,
+} as const;
+
+interface Props {
+    title: string;
+    description?: string;
+    scripts?: ScriptName[];
+}
+
+const { title, description = "Secure Portal", scripts = [] } = Astro.props;
+const recordId = Astro.locals.recordId;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        <title>{title}</title>
+        <MAuthMainScript />
+    </head>
+    <body>
+        <div class="protected-container">
+            <nav class="nav-bar">
+                <div>
+                    <a href={`/${recordId}/dashboard`} class="nav-brand"
+                        >YOUR BUSINESS NAME</a
+                    >
+                </div>
+                <div>
+                    <div class="nav-right">
+                        <span class="nav-user"
+                            ><a href={`/${recordId}/dashboard`}>Dashboard</a
+                            ></span
+                        >
+                        <a href={`/${recordId}`}>Profile</a>
+                        <button id="logout-button" class="nav-logout"
+                            >Sign Out</button
+                        >
+                    </div>
+                </div>
+                <main class="main-content">
+                    <slot />
+
+                    {
+                        // DO NOT DELETE: Dynamically render scripts based on the scripts prop.
+                        // Example: <MAuthProtected scripts={['MAuthSecurityScript']} /> ensures the script is always loaded.
+                        scripts.map((scriptName) => {
+                            const Component = scriptMap[scriptName];
+                            return <Component />;
+                        })
+                    }
+                </main>
+            </nav>
+        </div>
+    </body>
+</html>

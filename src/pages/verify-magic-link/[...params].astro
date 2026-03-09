@@ -1,0 +1,39 @@
+---
+// Magic Link Verification page
+import MAuthPublic from "@/layouts/MAuthPublic.astro";
+---
+
+<MAuthPublic title="Verify Magic Link" scripts={['MAuthTurnstileInit', 'MAuthVerifyMagicLinkScript']}>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Verify Magic Link</h1>
+            <div data-mindfulauth-field="message">
+                Bot protection failed to load. Please refresh the page.
+            </div>
+
+            <form method="post" data-mindfulauth-form="verify-magic-link">
+                <div hidden data-mindfulauth-field="twofa-code-container">
+                    <label>Two-Factor Authentication Code</label>
+                    <input
+                        type="text"
+                        name="twofa-code-magic-link"
+                        inputmode="numeric"
+                        pattern="[0-9]{6}"
+                        maxlength="6"
+                        placeholder="Enter 6-digit code"
+                        data-mindfulauth-field="twofa-code"
+                    />
+                    <small
+                        >Enter the 6-digit code from your authenticator app.</small
+                    >
+                </div>
+                <div data-mindfulauth-turnstile></div>
+                <button type="submit">Verify &amp; Sign In</button>
+            </form>
+
+            <div id="footer-link">
+                <a href="/magic-login">Request a new magic link</a>
+            </div>
+        </div>
+    </div>
+</MAuthPublic>

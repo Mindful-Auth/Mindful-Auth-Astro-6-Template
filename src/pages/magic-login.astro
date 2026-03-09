@@ -1,0 +1,34 @@
+---
+// Magic Link Login page
+import MAuthPublic from "@/layouts/MAuthPublic.astro";
+---
+
+<MAuthPublic title="Sign In with Magic Link" scripts={['MAuthTurnstileInit', 'MAuthMagicLoginScript']}>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Sign In with Magic Link</h1>
+            <p>We'll send you a magic link to sign in instantly.</p>
+
+            <form method="post" data-mindfulauth-form="magic-login">
+                <div>
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="your@email.com"
+                        required
+                        data-mindfulauth-field="email"
+                    />
+                </div>
+                <div data-mindfulauth-turnstile></div>
+                <button type="submit">Send Magic Link</button>
+                <div data-mindfulauth-field="message"></div>
+            </form>
+
+            <div class="auth-links">
+                <a href="/login">Sign In with Password</a>
+                <a href="/magic-register">Create an Account</a>
+            </div>
+        </div>
+    </div>
+</MAuthPublic>

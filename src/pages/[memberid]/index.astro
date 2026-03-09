@@ -1,0 +1,173 @@
+---
+import MAuthProtected from "@/layouts/MAuthProtected.astro";
+---
+
+<MAuthProtected title="Profile" scripts={['MAuthSecurityScript']}>
+
+  <header>
+    <h1>Profile Settings</h1>
+  </header>
+
+<!----- DO NOT DELETE THE FOLLOWING SECTIONS. MINDFUL AUTH DEPENDS ON THEM ----->
+<!----- YOU ARE FREE TO EDIT TEXT, CSS CLASSES AND REARRANGE SECTIONS.----->
+
+  <!-- CHANGE PASSWORD -->
+  <section class="content-card">
+    <h2>Change Password</h2>
+    <form method="post" data-mindfulauth-form="change-password">
+      <div>
+        <label><b>New Password *</b></label>
+        <small>Password must be at least 8 characters long.</small>
+        <input
+          type="password"
+          name="new-password"
+          minlength="8"
+          required
+          data-mindfulauth-field="new-password"
+        />
+      </div>
+      <div>
+        <label><b>Confirm Password *</b></label>
+        <input
+          type="password"
+          name="confirm-password"
+          required
+          data-mindfulauth-field="confirm-password"
+        />
+      </div>
+      <div hidden data-mindfulauth-field="twofa-container">
+        <label><b>2FA Code *</b></label>
+        <small>Enter the 6-digit code from your authenticator app.</small>
+        <input
+          type="text"
+          name="twofa-code-change-password"
+          inputmode="numeric"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          placeholder="Enter 6-digit code"
+          data-mindfulauth-field="twofa-code"
+        />
+      </div>
+      <button type="submit" class="submit-btn">Update Password</button>
+      <div class="message" data-mindfulauth-field="message"></div>
+    </form>
+  </section>
+
+
+  <!-- ENABLE 2FA SECTION -->
+  <section class="content-card" data-mindfulauth-section="enable">
+    <h2>Two-Factor Authentication</h2>
+    <p>Protect your account with an extra layer of security.</p>
+    <button class="submit-btn" data-mindfulauth-field="enable-btn">Enable 2FA</button>
+  </section>
+
+  <!-- 2FA SETUP -->
+  <section class="content-card" hidden data-mindfulauth-field="setup">
+    <h2>Scan the QR Code</h2>
+    <p>Use an authenticator app like Google Authenticator or 1Password to scan this code.</p>
+    <div class="qr-wrapper">
+      <div class="qr-display" data-mindfulauth-field="qr-code-container"></div>
+    </div>
+    <form method="post" class="form-compact" data-mindfulauth-form="verify-2fa">
+      <div class="form-group">
+        <label><b>Enter the 6-digit code from your app *</b></label>
+        <small>Look for the 6-digit code in your authenticator app</small>
+        <input
+          type="text"
+          placeholder="000000"
+          inputmode="numeric"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          class="code-input"
+          data-mindfulauth-field="token"
+        />
+      </div>
+      <button type="submit" class="submit-btn">Verify &amp; Enable</button>
+    </form>
+  </section>
+
+  <div class="message" data-mindfulauth-field="twofa-message"></div>
+
+  <!-- RECOVERY CODES -->
+  <section class="content-card security-alert" hidden data-mindfulauth-field="recovery-codes-container">
+    <div class="alert-header">
+      <h2>Save Your Recovery Codes</h2>
+      <p>
+        If you lose access to your authenticator app, these codes are the ONLY
+        way to access your account. Store them somewhere safe and private. Each
+        code can only be used once.
+      </p>
+    </div>
+    <div class="codes-display">
+      <ul class="recovery-list" data-mindfulauth-field="recovery-codes-list"></ul>
+    </div>
+    <div class="button-group">
+      <button class="submit-btn" data-mindfulauth-field="copy-codes-btn">Copy Codes</button>
+    </div>
+    <div class="message" data-mindfulauth-field="copy-message"></div>
+  </section>
+
+  <!-- DISABLE 2FA SECTION -->
+  <section class="content-card security-alert alert-danger" hidden data-mindfulauth-section="disable">
+    <h2>Disable Two-Factor Authentication</h2>
+      <p>Disabling 2FA will reduce your account security. You will only need your password to log in.</p>
+    <form method="post" class="form-compact" data-mindfulauth-form="disable-2fa">
+      <div class="form-group">
+        <label><b>Enter your current password to confirm *</b></label>
+        <small>Required for security verification</small>
+        <input type="password" required data-mindfulauth-field="disable-password" />
+      </div>
+      <button type="submit" class="submit-btn btn-danger" data-mindfulauth-field="disable-btn">Disable 2FA</button>
+    </form>
+    <div class="message" data-mindfulauth-field="disable-message"></div>
+  </section>
+
+  <!-- ADD AUTHENTICATION METHOD -->
+  <section class="content-card">
+    <h2>Add Authentication Method</h2>
+    <p>Add an additional way to log in to your account.</p>
+    <form method="post" data-mindfulauth-form="add-auth">
+      <fieldset class="auth-fieldset">
+        <legend>Select Authentication Method *</legend>
+        <div class="auth-options" data-mindfulauth-field="method">
+          <div class="auth-option">
+            <input
+              type="radio"
+              name="method"
+              value="Password"
+            />
+            <label>
+              <span class="option-title">Password</span>
+              <span class="option-desc">Set a new password for your account</span>
+            </label>
+          </div>
+          <div class="password-auth-container" hidden data-mindfulauth-field="password-container">
+            <label><b>New Password *</b></label>
+            <small>Password must be at least 8 characters long.</small>
+            <input
+              type="password"
+              name="password"
+              minlength="8"
+              placeholder="At least 8 characters"
+              data-mindfulauth-field="new-password"
+            />
+          </div>
+          <div class="auth-option">
+            <input
+              type="radio"
+              name="method"
+              value="Magic Link"
+            />
+            <label>
+              <span class="option-title">Magic Link</span>
+              <span class="option-desc">Passwordless login via email link</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit" class="submit-btn">Add Authentication Method</button>
+    </form>
+    <div class="message" data-mindfulauth-field="message"></div>
+  </section>
+
+</MAuthProtected>

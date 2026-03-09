@@ -1,0 +1,24 @@
+{
+	// ASTRO 6 DEPLOYMENT NOTE:
+	// To deploy: Run `npx wrangler deploy` after building.
+	// The adapter automatically generates dist/server/wrangler.json during `astro build`, and wrangler will use that config for deployment. You can also use `npm run deploy` which runs both build and deploy in one command.
+
+	"name": "astro-6-beta",
+	"compatibility_date": "2026-03-09",
+	"compatibility_flags": [
+		"global_fetch_strictly_public"
+	],
+	"routes": [
+		{
+			"pattern": "app.example.com/*",
+			"zone_name": "example.com"
+		}
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

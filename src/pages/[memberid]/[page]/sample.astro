@@ -1,0 +1,15 @@
+---
+import MAuthProtected from "@/layouts/MAuthProtected.astro";
+
+const recordId = Astro.locals.recordId;
+
+---
+<!-- This page url would be /{recordId}/{page}/sample -->
+ 
+<MAuthProtected title="Sample Page">
+    <section class="content-card">
+        <h2>Example page</h2>
+        <p>URL:<code>/[memberid]/some-page/sample</code></p>
+        <p>Your Member ID: <code>{recordId}</code></p>
+    </section>
+</MAuthProtected>    

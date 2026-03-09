@@ -1,0 +1,24 @@
+{
+  "name": "astro-6-beta",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "deploy": "astro build && npx wrangler deploy --config dist/server/wrangler.json",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.7-beta.1",
+    "@astrojs/cloudflare": "^13.0.0-beta.14",
+    "astro": "^6.0.0-beta.20",
+    "@mindfulauth/core": "^2.0.0-beta.10"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260307.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.71.0"
+  }
+}

@@ -1,0 +1,1 @@
+# Mindful Auth Astro 6 Template

@@ -3,7 +3,7 @@
 	// To deploy: Run `npx wrangler deploy` after building.
 	// The adapter automatically generates dist/server/wrangler.json during `astro build`, and wrangler will use that config for deployment. You can also use `npm run deploy` which runs both build and deploy in one command.
 
-	"name": "astro-6-beta",
+	"name": "astro-6-mindful-auth-template",
 	"compatibility_date": "2026-03-09",
 	"compatibility_flags": [
 		"global_fetch_strictly_public"

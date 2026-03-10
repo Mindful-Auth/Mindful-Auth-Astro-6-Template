@@ -1,5 +1,5 @@
 {
-  "name": "astro-6-beta",
+  "name": "astro-6-mindful-auth-template",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -11,13 +11,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.7-beta.1",
-    "@astrojs/cloudflare": "^13.0.0-beta.14",
-    "astro": "^6.0.0-beta.20",
-    "@mindfulauth/core": "^2.0.0-beta.10"
+    "@astrojs/check": "^0.9.7",
+    "@astrojs/cloudflare": "^13.0.2",
+    "astro": "^6.0.2",
+    "@mindfulauth/core": "^2.0.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260307.1",
+    "@cloudflare/workers-types": "^4.20260310.1",
     "typescript": "^5.9.3",
     "wrangler": "^4.71.0"
   }

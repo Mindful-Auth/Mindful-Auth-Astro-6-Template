@@ -1,15 +1,19 @@
 ---
-import MAuthProtected from "@/layouts/MAuthProtected.astro";
+import MAuthProtected from "@mindfulauth/astro/layouts/MAuthProtected.astro";
+import ProtectedLayout from "@/layouts/ProtectedLayout.astro";
 
 const recordId = Astro.locals.recordId;
+const { page } = Astro.params;
 
 ---
 <!-- This page url would be /{recordId}/{page}/sample -->
  
 <MAuthProtected title="Sample Page">
+  <ProtectedLayout>
     <section class="content-card">
         <h2>Example page</h2>
         <p>URL:<code>/[memberid]/some-page/sample</code></p>
         <p>Your Member ID: <code>{recordId}</code></p>
     </section>
+  </ProtectedLayout>
 </MAuthProtected>    

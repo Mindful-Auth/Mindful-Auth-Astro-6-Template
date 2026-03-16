@@ -1,18 +1,16 @@
 ---
-// Email Verified redirect page
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { MAuthMessage } from "@mindfulauth/astro/components";
 ---
-
 <MAuthPublic title="Email Verified" scripts={['MAuthVerifyEmailScript']}>
+<BaseLayout>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Email Verification</h1>
-            <div data-mindfulauth-field="message">Verifying your email...</div>
-            <a
-                href="/login"
-                style="display: none;"
-                data-mindfulauth-field="login-link">Continue to Login</a
-            >
+            <MAuthMessage defaultText="Verifying your email..." />
+            <a href="/login">Continue to Login</a>
         </div>
     </div>
+</BaseLayout>
 </MAuthPublic>

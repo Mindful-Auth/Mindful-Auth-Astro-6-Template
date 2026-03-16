@@ -1,39 +1,31 @@
 ---
-// Magic Link Verification page
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+    MAuthMessage,
+    MAuthForm,
+    MAuthTwoFACodeInput,
+    MAuthTurnstile,
+    MAuthSubmitButton,
+} from "@mindfulauth/astro/components";
 ---
-
 <MAuthPublic title="Verify Magic Link" scripts={['MAuthTurnstileInit', 'MAuthVerifyMagicLinkScript']}>
+<BaseLayout>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Verify Magic Link</h1>
-            <div data-mindfulauth-field="message">
-                Bot protection failed to load. Please refresh the page.
-            </div>
+            <MAuthMessage defaultText="Bot protection failed to load. Please refresh the page." />
 
-            <form method="post" data-mindfulauth-form="verify-magic-link">
-                <div hidden data-mindfulauth-field="twofa-code-container">
-                    <label>Two-Factor Authentication Code</label>
-                    <input
-                        type="text"
-                        name="twofa-code-magic-link"
-                        inputmode="numeric"
-                        pattern="[0-9]{6}"
-                        maxlength="6"
-                        placeholder="Enter 6-digit code"
-                        data-mindfulauth-field="twofa-code"
-                    />
-                    <small
-                        >Enter the 6-digit code from your authenticator app.</small
-                    >
-                </div>
-                <div data-mindfulauth-turnstile></div>
-                <button type="submit">Verify &amp; Sign In</button>
-            </form>
+            <MAuthForm formName="verify-magic-link">
+                <MAuthTwoFACodeInput name="twofa-code-magic-link" label="Two-Factor Authentication Code" />
+                <MAuthTurnstile />
+                <MAuthSubmitButton label="Verify & Sign In" />
+            </MAuthForm>
 
             <div id="footer-link">
                 <a href="/magic-login">Request a new magic link</a>
             </div>
         </div>
     </div>
+</BaseLayout>
 </MAuthPublic>

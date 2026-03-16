@@ -1,5 +1,5 @@
 /// <reference types="astro/client" />
-import type { MindfulAuthLocals } from '@mindfulauth/core';
+import type { MindfulAuthLocals } from '@mindfulauth/astro';
 
 // Astro.locals type definitions
 // Extend this interface with your own custom locals below

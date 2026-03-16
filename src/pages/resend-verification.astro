@@ -1,33 +1,30 @@
 ---
-// Resend Verification Email page
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+    MAuthForm,
+    MAuthEmailInput,
+    MAuthTurnstile,
+    MAuthSubmitButton,
+    MAuthMessage,
+} from "@mindfulauth/astro/components";
 ---
-
 <MAuthPublic title="Resend Verification Email" scripts={['MAuthTurnstileInit', 'MAuthResendVerificationScript']}>
+<BaseLayout>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Resend Verification Email</h1>
-            <p>
-                Enter your email address below, and we'll send you a link to
-                verify your email.
-            </p>
+            <p>Enter your email address below, and we'll send you a link to verify your email.</p>
 
-            <form method="post" data-mindfulauth-form="resend-verification">
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        data-mindfulauth-field="email"
-                    />
-                </div>
-                <div data-mindfulauth-turnstile></div>
-                <button type="submit">Resend Verification Email</button>
-                <p data-mindfulauth-field="message"></p>
-            </form>
+            <MAuthForm formName="resend-verification">
+                <MAuthEmailInput />
+                <MAuthTurnstile />
+                <MAuthSubmitButton label="Resend Verification Email" />
+                <MAuthMessage />
+            </MAuthForm>
 
-            <a href="/login">← Back to Login</a>
+            <a href="/login">&#8592; Back to Login</a>
         </div>
     </div>
+</BaseLayout>
 </MAuthPublic>

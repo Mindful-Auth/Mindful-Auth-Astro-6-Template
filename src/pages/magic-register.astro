@@ -1,40 +1,29 @@
 ---
-// Magic Link Registration page
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+    MAuthForm,
+    MAuthNameInput,
+    MAuthEmailInput,
+    MAuthTurnstile,
+    MAuthSubmitButton,
+    MAuthMessage,
+} from "@mindfulauth/astro/components";
 ---
-
 <MAuthPublic title="Create Account with Magic Link" scripts={['MAuthTurnstileInit', 'MAuthMagicRegisterScript']}>
+<BaseLayout>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Create Your Account</h1>
-            <p>
-                Enter your details to get started with magic link
-                authentication.
-            </p>
+            <p>Enter your details to get started with magic link authentication.</p>
 
-            <form method="post" data-mindfulauth-form="magic-register">
-                <div>
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        required
-                        data-mindfulauth-field="name"
-                    />
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        data-mindfulauth-field="email"
-                    />
-                </div>
-                <div data-mindfulauth-turnstile></div>
-                <button type="submit">Create Account</button>
-                <div data-mindfulauth-field="message"></div>
-            </form>
+            <MAuthForm formName="magic-register">
+                <MAuthNameInput />
+                <MAuthEmailInput />
+                <MAuthTurnstile />
+                <MAuthSubmitButton label="Create Account" />
+                <MAuthMessage />
+            </MAuthForm>
 
             <div class="auth-links">
                 <a href="/magic-login">Already have an account? Sign In</a>
@@ -42,4 +31,5 @@ import MAuthPublic from "@/layouts/MAuthPublic.astro";
             </div>
         </div>
     </div>
+</BaseLayout>
 </MAuthPublic>

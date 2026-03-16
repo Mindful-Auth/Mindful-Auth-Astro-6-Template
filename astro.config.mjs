@@ -1,8 +1,8 @@
 // Astro configuration for Mindful Auth Portal
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
-import { mauthSecurityConfig, getMauthViteDefines } from '@mindfulauth/core/config';
-import { getScriptHashes } from '@mindfulauth/core/csp';
+import { mauthSecurityConfig, getMauthViteDefines } from '@mindfulauth/astro/config';
+import { getScriptHashes } from '@mindfulauth/astro/csp';
 
 // Configure Mindful Auth: customize skip assets
 const mauthCfg = mauthSecurityConfig({
@@ -43,7 +43,7 @@ export default defineConfig({
     security: {
         checkOrigin: true,
         allowedDomains: [
-            { hostname: 'astro-6-beta.mindfulvm.com', protocol: 'https' }
+            { hostname: 'mindfulauth.com', protocol: 'https' }
         ],
         // Maximum body size for action requests (enforced at Astro level)
         // Set to 1 MB for authentication operations. You can increase this value for other actions (e.g., file uploads), but auth flows will be limited to 1 MB by the Mindful Auth Worker independently. This ensures authentication operations stay lean and protected.

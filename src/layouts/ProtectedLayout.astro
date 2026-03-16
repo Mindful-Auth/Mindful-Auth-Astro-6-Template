@@ -1,0 +1,22 @@
+---
+// Protected layout for member pages
+// Provides global CSS + navigation; paired with @mindfulauth/astro/layouts/MAuthProtected.astro (in mindfulauth/astro/layouts/)
+import "../styles/global.css";
+const recordId = Astro.locals.recordId;
+---
+<div class="protected-container">
+    <nav class="nav-bar">
+        <div>
+            <a href={`/${recordId}/dashboard`} class="nav-brand">YOUR BUSINESS NAME</a>
+        </div>
+        <div>
+        <div class="nav-right">
+            <span class="nav-user"><a href={`/${recordId}/dashboard`}>Dashboard</a></span>
+            <a href={`/${recordId}`}>Profile</a>
+            <button id="logout-button" class="nav-logout">Sign Out</button>
+        </div>
+    </nav>
+    <main class="main-content">
+        <slot />
+    </main>
+</div>

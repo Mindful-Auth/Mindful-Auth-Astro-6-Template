@@ -1,5 +1,6 @@
 ---
-import MAuthProtected from "@/layouts/MAuthProtected.astro";
+import MAuthProtected from "@mindfulauth/astro/layouts/MAuthProtected.astro";
+import ProtectedLayout from "@/layouts/ProtectedLayout.astro";
 
 const recordId = Astro.locals.recordId;
 
@@ -7,9 +8,11 @@ const recordId = Astro.locals.recordId;
 <!-- This page url would be /{recordId}/static-folder/static-page -->
  
 <MAuthProtected title="Static Sample Page">
+  <ProtectedLayout>
     <section class="content-card">
         <h2>Example of a Static Page</h2>
         <p>URL: <code>/[memberid]/static-folder/static-page</code></p>
         <p>Your Member ID: <code>{recordId}</code></p>
     </section>
+  </ProtectedLayout>
 </MAuthProtected>    

@@ -1,38 +1,42 @@
 ---
-// Login page - Password authentication
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+    MAuthForm,
+    MAuthEmailInput,
+    MAuthPasswordInput,
+    MAuthTwoFASection,
+    MAuthTurnstile,
+    MAuthSubmitButton,
+    MAuthMessage,
+} from "@mindfulauth/astro/components";
 ---
 
-<MAuthPublic title="Sign In" scripts={['MAuthTurnstileInit', 'MAuthLoginScript']}>
-    <div class="auth-container">
-        <div class="auth-card">
-            <h1>Sign In with Password</h1>
-    <p>Enter your email and password to get started.</p>
-    
-    <form method="post" data-mindfulauth-form="login">
-        <div>
-            <label>Email</label>
-            <input type="email" name="email" required data-mindfulauth-field="email">
+<MAuthPublic
+    title="Sign In"
+    scripts={["MAuthTurnstileInit", "MAuthLoginScript"]}
+>
+    <BaseLayout>
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1>Sign In with Password</h1>
+                <p>Enter your email and password to get started.</p>
+
+                <MAuthForm formName="login">
+                    <MAuthEmailInput />
+                    <MAuthPasswordInput label="Password" />
+                    <MAuthTwoFASection />
+                    <a href="/forgot-password">Forgot Your Password?</a>
+                    <MAuthTurnstile />
+                    <MAuthSubmitButton label="Log In" />
+                    <MAuthMessage />
+                </MAuthForm>
+
+                <div class="auth-links">
+                    <a href="/magic-login">Sign In with Magic Link</a>
+                    <a href="/register">Create an Account</a>
+                </div>
+            </div>
         </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" required data-mindfulauth-field="password">
-        </div>
-        <div class="hidden" data-mindfulauth-field="twofa-section">
-            <label>Authenticator Code</label>
-            <input type="text" name="twofa-code" pattern="[0-9]*" maxlength="6" placeholder="123456" inputmode="numeric" data-mindfulauth-field="twofa-code">
-            <a href="#" data-mindfulauth-field="use-recovery-link">Use a recovery code instead</a>
-        </div>
-        <a href="/forgot-password">Forgot Your Password?</a>
-        <div data-mindfulauth-turnstile></div>
-        <button type="submit">Log In</button>
-        <p data-mindfulauth-field="message"></p>
-    </form>
-    
-    <div class="auth-links">
-        <a href="/magic-login">Sign In with Magic Link</a>
-        <a href="/register">Create an Account</a>
-    </div>
-        </div>
-    </div>
+    </BaseLayout>
 </MAuthPublic>

@@ -1,29 +1,27 @@
 ---
-// Magic Link Login page
-import MAuthPublic from "@/layouts/MAuthPublic.astro";
+import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+    MAuthForm,
+    MAuthEmailInput,
+    MAuthTurnstile,
+    MAuthSubmitButton,
+    MAuthMessage,
+} from "@mindfulauth/astro/components";
 ---
-
 <MAuthPublic title="Sign In with Magic Link" scripts={['MAuthTurnstileInit', 'MAuthMagicLoginScript']}>
+<BaseLayout>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Sign In with Magic Link</h1>
             <p>We'll send you a magic link to sign in instantly.</p>
 
-            <form method="post" data-mindfulauth-form="magic-login">
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="your@email.com"
-                        required
-                        data-mindfulauth-field="email"
-                    />
-                </div>
-                <div data-mindfulauth-turnstile></div>
-                <button type="submit">Send Magic Link</button>
-                <div data-mindfulauth-field="message"></div>
-            </form>
+            <MAuthForm formName="magic-login">
+                <MAuthEmailInput placeholder="your@email.com" />
+                <MAuthTurnstile />
+                <MAuthSubmitButton label="Send Magic Link" />
+                <MAuthMessage />
+            </MAuthForm>
 
             <div class="auth-links">
                 <a href="/login">Sign In with Password</a>
@@ -31,4 +29,5 @@ import MAuthPublic from "@/layouts/MAuthPublic.astro";
             </div>
         </div>
     </div>
+</BaseLayout>
 </MAuthPublic>

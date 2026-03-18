@@ -2,12 +2,32 @@
 // Receives webhook events and sends transactional emails via Postmark.
 // Create an account at https://www.postmarkapp.com/?via=mindfulauth (affiliate link).
 //
-// Webhook URL: https://app.yourdomain.com/api/public/webhooks/mauth-webhook
-// Configure this URL in Mindful Auth to receive webhook events
+// Webhook URL Format: https://app.yourdomain.com/api/public/[webhookSecret]/mauth-webhook
+// The [webhookSecret] is a unique identifier that must match the WEBHOOK_SECRET environment variable.
+// This provides security through obscurity - the endpoint URL becomes unguessable.
 //
-// Required environment variables
-//   POSTMARK_API_TOKEN  – Your Postmark server API token
-//   EMAIL_FROM          – Verified sender address (e.g. "App Name <no-reply@example.com>")
+// This pattern demonstrates a recommended way to protect public API endpoints:
+// Other developers can follow this same approach for their own public endpoints by
+// using a [secret] parameter and validating it against an environment variable.
+//
+// Setup Instructions:
+// 1. Generate a unique secret (SHA256 hash recommended):
+//    node -e "console.log('sha256_' + require('crypto').randomBytes(32).toString('hex'))"
+// 2. Add to wrangler.jsonc under your environment:
+//    "env": {
+//      "production": {
+//        "vars": {
+//          "WEBHOOK_SECRET": "sha256_your_generated_secret_here"
+//        }
+//      }
+//    }
+// 3. Configure this full URL in Mindful Auth webhook settings:
+//    https://app.yourdomain.com/api/public/sha256_your_generated_secret_here/mauth-webhook
+//
+// Required environment variables:
+//   WEBHOOK_SECRET       – Unique identifier for this webhook endpoint (prevents unauthorized access)
+//   POSTMARK_API_TOKEN   – Your Postmark server API token
+//   EMAIL_FROM           – Verified sender address (e.g. "App Name <no-reply@example.com>")
 
 import type { APIRoute } from 'astro';
 import {
@@ -44,8 +64,22 @@ type WebhookPayload = PasswordResetPayload | VerifyEmailPayload | MagicLoginPayl
 
 // ── Route handler
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request, params }) => {
   try {
+    // ── Verify webhook secret ──
+    const WEBHOOK_SECRET = import.meta.env.WEBHOOK_SECRET;
+    const urlSecret = params.webhookSecret;
+
+    if (!WEBHOOK_SECRET) {
+      console.error('[Webhook] Missing WEBHOOK_SECRET environment variable');
+      return new Response(JSON.stringify({ error: 'Server misconfigured' }), { status: 500 });
+    }
+
+    if (!urlSecret || urlSecret !== WEBHOOK_SECRET) {
+      // Return 404 to hide the existence of the endpoint
+      return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 });
+    }
+
     // ── Environment variables ──
     const POSTMARK_API_TOKEN = import.meta.env.POSTMARK_API_TOKEN;
     const EMAIL_FROM = import.meta.env.EMAIL_FROM;
@@ -108,7 +142,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 };
 
 // GET handler for testing endpoint accessibility
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ params }) => {
+  const WEBHOOK_SECRET = import.meta.env.WEBHOOK_SECRET;
+  const urlSecret = params.webhookSecret;
+
+  // Return 404 if secret doesn't match (consistent with POST)
+  if (!urlSecret || urlSecret !== WEBHOOK_SECRET) {
+    return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 });
+  }
+
   return new Response(JSON.stringify({ 
     status: 'Webhook endpoint is active',
     method: 'POST',

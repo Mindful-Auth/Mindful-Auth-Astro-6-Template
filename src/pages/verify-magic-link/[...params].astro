@@ -9,8 +9,8 @@ import {
     MAuthSubmitButton,
 } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Verify Magic Link" scripts={['MAuthTurnstileInit', 'MAuthVerifyMagicLinkScript']}>
-<BaseLayout>
+<BaseLayout title="Verify Magic Link">
+<MAuthPublic scripts={['MAuthTurnstileInit', 'MAuthVerifyMagicLinkScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Verify Magic Link</h1>
@@ -27,5 +27,5 @@ import {
             </div>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

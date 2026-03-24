@@ -8,12 +8,12 @@ const { page } = Astro.params;
 ---
 <!-- This page url would be /{recordId}/{page}/sample -->
  
-<MAuthProtected title="Sample Page">
-  <ProtectedLayout>
+<ProtectedLayout title="Sample Page">
+  <MAuthProtected>
     <section class="content-card">
         <h2>Example page</h2>
         <p>URL:<code>/[memberid]/some-page/sample</code></p>
         <p>Your Member ID: <code>{recordId}</code></p>
     </section>
-  </ProtectedLayout>
-</MAuthProtected>    
+  </MAuthProtected>
+</ProtectedLayout>    

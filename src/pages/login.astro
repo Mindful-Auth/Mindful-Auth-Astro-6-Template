@@ -12,11 +12,8 @@ import {
 } from "@mindfulauth/astro/components";
 ---
 
-<MAuthPublic
-    title="Sign In"
-    scripts={["MAuthTurnstileInit", "MAuthLoginScript"]}
->
-    <BaseLayout>
+<BaseLayout title="Sign In">
+    <MAuthPublic scripts={["MAuthTurnstileInit", "MAuthLoginScript"]}>
         <div class="auth-container">
             <div class="auth-card">
                 <h1>Sign In with Password</h1>
@@ -38,5 +35,5 @@ import {
                 </div>
             </div>
         </div>
-    </BaseLayout>
-</MAuthPublic>
+    </MAuthPublic>
+</BaseLayout>

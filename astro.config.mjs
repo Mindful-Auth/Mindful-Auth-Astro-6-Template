@@ -1,8 +1,9 @@
 // Astro configuration for Mindful Auth Portal
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
+import { fileURLToPath } from 'url';
 import { mauthSecurityConfig, getMauthViteDefines } from '@mindfulauth/astro/config';
-import { getScriptHashes } from '@mindfulauth/astro/csp';
+import { getScriptHashes, getScriptHashesFromDir } from '@mindfulauth/astro/csp';
 
 // Configure Mindful Auth: customize skip assets
 const mauthCfg = mauthSecurityConfig({
@@ -63,8 +64,9 @@ export default defineConfig({
                     'https://challenges.cloudflare.com',
                     'https://*.cloudflareinsights.com'
                 ],
-                // SHA-384 hashes for <script is:inline> in mindfulauth/astro/ — auto-computed at build time.
-                hashes: getScriptHashes(),
+                // SHA-384 hashes for <script is:inline> — auto-computed at build time.
+                // getScriptHashes() covers mindfulauth/astro/authScripts/; getScriptHashesFromDir() covers src/components/.
+                hashes: [...getScriptHashes(), ...getScriptHashesFromDir(fileURLToPath(new URL('./src/components', import.meta.url)))],
             },
             // Style sources: self only (Astro auto-injects hashes for bundled styles)
             styleDirective: {

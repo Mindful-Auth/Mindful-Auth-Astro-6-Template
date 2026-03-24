@@ -7,12 +7,12 @@ const recordId = Astro.locals.recordId;
 ---
 <!-- This page url would be /{recordId}/static-folder/static-page -->
  
-<MAuthProtected title="Static Sample Page">
-  <ProtectedLayout>
+<ProtectedLayout title="Static Sample Page">
+  <MAuthProtected>
     <section class="content-card">
         <h2>Example of a Static Page</h2>
         <p>URL: <code>/[memberid]/static-folder/static-page</code></p>
         <p>Your Member ID: <code>{recordId}</code></p>
     </section>
-  </ProtectedLayout>
-</MAuthProtected>    
+  </MAuthProtected>
+</ProtectedLayout>    

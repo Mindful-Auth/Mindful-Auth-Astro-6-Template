@@ -4,8 +4,8 @@ import ProtectedLayout from "@/layouts/ProtectedLayout.astro";
 import { MAuthChangePassword, MAuthEnable2FA, MAuthDisable2FA, MAuthAddAuthMethod } from "@mindfulauth/astro/components";
 ---
 
-<MAuthProtected title="Profile" scripts={['MAuthSecurityScript']}>
-  <ProtectedLayout>
+<ProtectedLayout title="Profile">
+  <MAuthProtected scripts={['MAuthSecurityScript']}>
     <header>
       <h1>Profile Settings</h1>
     </header>
@@ -49,5 +49,5 @@ import { MAuthChangePassword, MAuthEnable2FA, MAuthDisable2FA, MAuthAddAuthMetho
       title="Add Authentication Method"
       submitLabel="Add Authentication Method"
     />
-  </ProtectedLayout>
-</MAuthProtected>
+  </MAuthProtected>
+</ProtectedLayout>

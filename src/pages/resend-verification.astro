@@ -9,8 +9,8 @@ import {
     MAuthMessage,
 } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Resend Verification Email" scripts={['MAuthTurnstileInit', 'MAuthResendVerificationScript']}>
-<BaseLayout>
+<BaseLayout title="Resend Verification Email">
+<MAuthPublic scripts={['MAuthTurnstileInit', 'MAuthResendVerificationScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Resend Verification Email</h1>
@@ -26,5 +26,5 @@ import {
             <a href="/login">&#8592; Back to Login</a>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

@@ -9,8 +9,8 @@ import {
     MAuthMessage,
 } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Sign In with Magic Link" scripts={['MAuthTurnstileInit', 'MAuthMagicLoginScript']}>
-<BaseLayout>
+<BaseLayout title="Sign In with Magic Link">
+<MAuthPublic scripts={['MAuthTurnstileInit', 'MAuthMagicLoginScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Sign In with Magic Link</h1>
@@ -29,5 +29,5 @@ import {
             </div>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

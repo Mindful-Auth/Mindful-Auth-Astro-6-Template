@@ -10,8 +10,8 @@ import {
     MAuthMessage,
 } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Reset Password" scripts={['MAuthTurnstileInit', 'MAuthResetPasswordScript']}>
-<BaseLayout>
+<BaseLayout title="Reset Password">
+<MAuthPublic scripts={['MAuthTurnstileInit', 'MAuthResetPasswordScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Set a New Password</h1>
@@ -27,5 +27,5 @@ import {
             </MAuthForm>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

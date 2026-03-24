@@ -5,8 +5,8 @@ import ProtectedLayout from "@/layouts/ProtectedLayout.astro";
 const recordId = Astro.locals.recordId;
 
 ---
-<MAuthProtected title="Dashboard">
-  <ProtectedLayout>
+<ProtectedLayout title="Dashboard">
+  <MAuthProtected>
     <div class="page-content">
         <section class="content-card">
             <h2>Secure Dashboard</h2>
@@ -23,5 +23,5 @@ const recordId = Astro.locals.recordId;
             </ul>
         </nav>
     </div>
-  </ProtectedLayout>
-</MAuthProtected>
+  </MAuthProtected>
+</ProtectedLayout>

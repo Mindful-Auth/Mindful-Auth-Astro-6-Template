@@ -3,8 +3,8 @@ import MAuthPublic from "@mindfulauth/astro/layouts/MAuthPublic.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { MAuthMessage } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Email Verified" scripts={['MAuthVerifyEmailScript']}>
-<BaseLayout>
+<BaseLayout title="Email Verified">
+<MAuthPublic scripts={['MAuthVerifyEmailScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Email Verification</h1>
@@ -12,5 +12,5 @@ import { MAuthMessage } from "@mindfulauth/astro/components";
             <a href="/login">Continue to Login</a>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

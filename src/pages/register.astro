@@ -11,8 +11,8 @@ import {
     MAuthMessage,
 } from "@mindfulauth/astro/components";
 ---
-<MAuthPublic title="Create Account" scripts={['MAuthTurnstileInit', 'MAuthRegisterPasswordScript']}>
-<BaseLayout>
+<BaseLayout title="Create Account">
+<MAuthPublic scripts={['MAuthTurnstileInit', 'MAuthRegisterPasswordScript']}>
     <div class="auth-container">
         <div class="auth-card">
             <h1>Create New Account</h1>
@@ -34,5 +34,5 @@ import {
             </div>
         </div>
     </div>
-</BaseLayout>
 </MAuthPublic>
+</BaseLayout>

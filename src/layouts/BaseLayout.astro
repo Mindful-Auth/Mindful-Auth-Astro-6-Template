@@ -1,6 +1,22 @@
 ---
-// Base layout for all pages
-// Provides global CSS; paired with @mindfulauth/astro/layouts/* (in mindfulauth/astro/layouts/)
+// Base layout for all public auth pages
+// Provides document structure + global CSS; paired with @mindfulauth/astro/layouts/MAuthPublic.astro
 import "../styles/global.css";
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
 ---
-<slot />
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>

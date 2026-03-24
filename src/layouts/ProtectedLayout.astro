@@ -1,22 +1,38 @@
 ---
 // Protected layout for member pages
-// Provides global CSS + navigation; paired with @mindfulauth/astro/layouts/MAuthProtected.astro (in mindfulauth/astro/layouts/)
+// Provides document structure, global CSS + navigation; paired with @mindfulauth/astro/layouts/MAuthProtected.astro
 import "../styles/global.css";
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
 const recordId = Astro.locals.recordId;
 ---
-<div class="protected-container">
-    <nav class="nav-bar">
-        <div>
-            <a href={`/${recordId}/dashboard`} class="nav-brand">YOUR BUSINESS NAME</a>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <div class="protected-container">
+            <nav class="nav-bar">
+                <div>
+                    <a href={`/${recordId}/dashboard`} class="nav-brand">YOUR BUSINESS NAME</a>
+                </div>
+                <div>
+                <div class="nav-right">
+                    <span class="nav-user"><a href={`/${recordId}/dashboard`}>Dashboard</a></span>
+                    <a href={`/${recordId}`}>Profile</a>
+                    <button id="logout-button" class="nav-logout">Sign Out</button>
+                </div>
+            </nav>
+            <main class="main-content">
+                <slot />
+            </main>
         </div>
-        <div>
-        <div class="nav-right">
-            <span class="nav-user"><a href={`/${recordId}/dashboard`}>Dashboard</a></span>
-            <a href={`/${recordId}`}>Profile</a>
-            <button id="logout-button" class="nav-logout">Sign Out</button>
-        </div>
-    </nav>
-    <main class="main-content">
-        <slot />
-    </main>
-</div>
+    </body>
+</html>

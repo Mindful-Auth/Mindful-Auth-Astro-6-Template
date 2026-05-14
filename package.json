@@ -11,15 +11,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/cloudflare": "^13.1.5",
-    "astro": "^6.1.2",
-    "@mindfulauth/astro": "^4.0.0"
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^13.5.1",
+    "astro": "^6.3.3",
+    "@mindfulauth/astro": "^4.0.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260329.1",
-    "@types/node": "^25.5.0",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.78.0"
+    "@cloudflare/workers-types": "^4.20260511.1",
+    "@types/node": "^25.7.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.91.0"
   }
 }
